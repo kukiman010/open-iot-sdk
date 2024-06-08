@@ -1,0 +1,92 @@
+# Copyright (c) 2021-2023 Arm Limited and Contributors. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# This file contains the basic building block for build an test jobs
+
+# aws_clientcredential_h and aws_clientcredential_keys_h are variables
+# containing the path to files storing keys used by the CI to connect
+# to AWS
+# iothub_credentials_h is a file with credentials require by Azure SDK
+# example to connect to IoT Hub service
+.build-and-test:
+  script:
+    - set -x
+    - cmake -S templates -B tmp
+    # TEST is a single test passed from matrix job
+    # TOOLCHAINS, and PLATFORMS are comma separated arguments
+    - |
+      for TOOLCHAIN in ${TOOLCHAINS//,/ }
+      do
+        for PLATFORM in ${PLATFORMS//,/ }
+        do
+          all_tests=`find __codegen/${TEST} -name ${PLATFORM}`
+          for sub_test in $all_tests
+          do
+            echo "*******************************************************"
+            echo "Building: ${TOOLCHAIN}-${PLATFORM}-${TEST}-${sub_test}"
+            echo "*******************************************************"
+            if [[ -e ${sub_test}/example/bootstrap.sh ]]; then
+                source ${sub_test}/example/bootstrap.sh
+            fi
+            cmake -S ${sub_test} -B __build -GNinja --toolchain toolchains/toolchain-${TOOLCHAIN}.cmake \
+                -D FETCHCONTENT_SOURCE_DIR_OPEN-IOT-SDK=. -D FETCHCONTENT_QUIET=OFF \
+                -D CMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+            [ -e __build/_deps/trusted-firmware-m-src ] \
+                && pip3 install -r __build/_deps/trusted-firmware-m-src/tools/requirements.txt
+
+            [ -e ${sub_test}/aws-credentials ] \
+                && developer-tools/utils/cloud_helper/aws.sh \
+                --out-creds-file ${sub_test}/aws-credentials/aws_clientcredential.h \
+                --out-keys-file ${sub_test}/aws-credentials/aws_clientcredential_keys.h
+            [ -e ${sub_test}/iothub-config ] \
+                && developer-tools/utils/cloud_helper/az.sh \
+                --template-type iot \
+                --out-file ${sub_test}/iothub-config/iothub_credentials.h
+            [ -e ${sub_test}/sample_azure_iot_credentials.h ] \
+                && developer-tools/utils/cloud_helper/az.sh \
+                --template-type nx \
+                --out-file ${sub_test}/sample_azure_iot_credentials.h
+            cmake --build __build
+
+            # The -i option of cppcheck doesn't work when a json database is used
+            # to workaround this limitation, we filter paths in __build/_deps directly
+            # in the json file.
+            cp __build/compile_commands.json __build/compile_commands.json.bak
+            jq '[.[] | select(.file | contains("__build/_deps") | not )]' __build/compile_commands.json > __build/compile_commands.json.tmp
+            mv __build/compile_commands.json.tmp __build/compile_commands.json
+            cppcheck ${CPPCHECK_OPTIONS}
+            mv __build/compile_commands.json.bak __build/compile_commands.json
+
+            base_name=`echo ${TOOLCHAIN}-${PLATFORM}-${TEST}-${sub_test} | tr / _`
+            pyedmgr=`find __build -type d -name 'pyedmgr-src'`
+            tar -czf ${base_name}.tar.gz __build/CTestTestfile.cmake __build/*.elf ${sub_test} $pyedmgr # No quotes because $pyedmgr contains multiple items
+            find __build -name CMakeCache.txt -exec rm {} \;
+          done # sub_test
+        done # PLATFORM
+      done # TOOLCHAIN
+
+      echo "All tests built:"
+      ls -1 *.tar.gz
+
+    # Test stage
+    - |
+      all_tarballs="*.tar.gz"
+      for tarball in $all_tarballs
+      do
+        tar -xvf ${tarball}
+        echo "*******************************************************"
+        echo "Executing: ${tarball}"
+        echo "*******************************************************"
+        # store report in parent directory as __build will be deleted
+        ctest --test-dir __build -V --no-tests=error  --output-junit ../report-${tarball}.xml
+        rm -rf __build
+      done
+      echo "All tests run:"
+      echo $all_tarballs | tr ' ' '\n'
+
+  artifacts:
+    when: always
+    paths:
+      - "*.tar.gz"
+    expire_in: 7 days
