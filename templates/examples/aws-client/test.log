@@ -1,0 +1,18 @@
+main - Starting kernel
+AWSN - [a-zA-Z0-9\.-]+.amazonaws.com [0-9]+(?:\.[0-9]+){3}:[0-9]+ connecting...
+AWSN - Successful connection to the server
+AWSN - Performing the TLS handshake...
+AWSN - Successfully completed the TLS handshake
+AWSN - Verifying certificate...
+AWSN - Certificate verification passed
+AWSN - Established TLS connection
+MQTT - Packet received. ReceivedBytes=2.
+MQTT - CONNACK session present bit not set.
+MQTT - Connection accepted.
+MQTT - Received MQTT CONNACK successfully from broker.
+MQTT - MQTT connection established with the broker.
+MQTT - Packet received. ReceivedBytes=2.
+MQTT - Ack packet deserialized with result: MQTTSuccess.
+MQTT - State record updated. New state=MQTTPublishDone.
+MQTT - Disconnected from the broker.
+main - Demo finished !

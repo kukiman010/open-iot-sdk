@@ -1,0 +1,1 @@
+cmake: Fix `static_assert` in pw_iot_sdk_config by depending on `c_static_assert` compile feature.

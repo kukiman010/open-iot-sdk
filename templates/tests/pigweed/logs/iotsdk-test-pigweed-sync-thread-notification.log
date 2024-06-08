@@ -1,0 +1,15 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] ThreadNotification.EmptyInitialState
+[       OK ] ThreadNotification.EmptyInitialState
+[ RUN      ] ThreadNotification.Release
+[       OK ] ThreadNotification.Release
+[ RUN      ] ThreadNotification.EmptyInitialStateStatic
+[       OK ] ThreadNotification.EmptyInitialStateStatic
+[ RUN      ] ThreadNotification.ReleaseStatic
+[       OK ] ThreadNotification.ReleaseStatic
+[==========] Done running all tests.
+[  PASSED  ] 4 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

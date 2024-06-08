@@ -1,0 +1,14 @@
+[tool.towncrier]
+directory = "release-changes"
+filename = "CHANGELOG.md"
+template = "developer-tools/templates/towncrier/template.rst"
+
+[[tool.towncrier.type]]
+directory = "change"
+name = "Changes"
+showcontent = true
+
+[tool.black]
+diff = true
+color = true
+line-length = 120

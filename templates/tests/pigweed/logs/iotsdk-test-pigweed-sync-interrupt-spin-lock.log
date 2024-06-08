@@ -1,0 +1,21 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] InterruptSpinLock.LockUnlock
+[       OK ] InterruptSpinLock.LockUnlock
+[ RUN      ] InterruptSpinLock.LockUnlockStatic
+[       OK ] InterruptSpinLock.LockUnlockStatic
+[ RUN      ] InterruptSpinLock.TryLockUnlock
+[       OK ] InterruptSpinLock.TryLockUnlock
+[ RUN      ] VirtualInterruptSpinLock.LockUnlock
+[       OK ] VirtualInterruptSpinLock.LockUnlock
+[ RUN      ] VirtualInterruptSpinLock.LockUnlockStatic
+[       OK ] VirtualInterruptSpinLock.LockUnlockStatic
+[ RUN      ] InterruptSpinLock.LockUnlockInC
+[       OK ] InterruptSpinLock.LockUnlockInC
+[ RUN      ] InterruptSpinLock.TryLockUnlockInC
+[       OK ] InterruptSpinLock.TryLockUnlockInC
+[==========] Done running all tests.
+[  PASSED  ] 7 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

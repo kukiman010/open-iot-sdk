@@ -1,0 +1,31 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] TimedThreadNotification.EmptyInitialState
+[       OK ] TimedThreadNotification.EmptyInitialState
+[ RUN      ] TimedThreadNotification.Release
+[       OK ] TimedThreadNotification.Release
+[ RUN      ] TimedThreadNotification.EmptyInitialStateStatic
+[       OK ] TimedThreadNotification.EmptyInitialStateStatic
+[ RUN      ] TimedThreadNotification.ReleaseStatic
+[       OK ] TimedThreadNotification.ReleaseStatic
+[ RUN      ] TimedThreadNotification.TryAcquireForNotified
+[       OK ] TimedThreadNotification.TryAcquireForNotified
+[ RUN      ] TimedThreadNotification.TryAcquireForNotNotifiedPositiveTimeout
+[       OK ] TimedThreadNotification.TryAcquireForNotNotifiedPositiveTimeout
+[ RUN      ] TimedThreadNotification.TryAcquireForNotNotifiedZeroLengthTimeout
+[       OK ] TimedThreadNotification.TryAcquireForNotNotifiedZeroLengthTimeout
+[ RUN      ] TimedThreadNotification.TryAcquireForNotNotifiedNegativeTimeout
+[       OK ] TimedThreadNotification.TryAcquireForNotNotifiedNegativeTimeout
+[ RUN      ] TimedThreadNotification.TryAcquireUntilNotified
+[       OK ] TimedThreadNotification.TryAcquireUntilNotified
+[ RUN      ] TimedThreadNotification.TryAcquireUntilNotNotifiedFutureDeadline
+[       OK ] TimedThreadNotification.TryAcquireUntilNotNotifiedFutureDeadline
+[ RUN      ] TimedThreadNotification.TryAcquireUntilNotNotifiedCurrentDeadline
+[       OK ] TimedThreadNotification.TryAcquireUntilNotNotifiedCurrentDeadline
+[ RUN      ] TimedThreadNotification.TryAcquireUntilNotNotifiedPastDeadline
+[       OK ] TimedThreadNotification.TryAcquireUntilNotNotifiedPastDeadline
+[==========] Done running all tests.
+[  PASSED  ] 12 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

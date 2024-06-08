@@ -1,0 +1,24 @@
+Running 7 tests
+
+Running Test:    open and close socket
+Test:            open and close socket    PASSED
+
+Running Test:    bind socket
+Test:            bind socket    PASSED
+
+Running Test:    using invalid socket
+Test:            using invalid socket    PASSED
+
+Running Test:    socket options
+Test:            socket options    PASSED
+
+Running Test:    send and receive
+Test:            send and receive    PASSED
+
+Running Test:    get host name
+Test:            get host name    PASSED
+
+Running Test:    connect, listen, accept
+Test:            connect, listen, accept    PASSED
+
+All tests PASSED

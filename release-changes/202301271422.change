@@ -1,0 +1,1 @@
+cmsis_lwip: Remove duplication of SystemCoreClock from cmsis-lwip example.

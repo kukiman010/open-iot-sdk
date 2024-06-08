@@ -1,0 +1,11 @@
+Initialising network
+Starting kernel
+Awaiting network connection
+Network connection enabled
+Starting socket demo
+Opening connection to remote port [0-9]+
+Sending message:
+sent [0-9]+ bytes
+Complete message sent
+received [0-9]+ bytes:
+Demo concluded successfully

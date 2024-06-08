@@ -1,0 +1,5 @@
+In main()
+Thread ID for PSA services: 0x[a-fA-F0-9]+
+Starting kernel and threads
+In psa_thread()
+Verify a hash.*Verified a hash

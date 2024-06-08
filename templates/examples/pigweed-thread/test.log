@@ -1,0 +1,10 @@
+Kernel initialised
+[35m[1mINF[0m - main - Starting kernel
+[35m[1mINF[0m - main - Main task started
+[35m[1mINF[0m - main - thread1 ran to completion
+[35m[1mINF[0m - main - thread2 ran to completion
+[35m[1mINF[0m - main - thread3 ran to completion
+[35m[1mINF[0m - main - thread1 detached
+[35m[1mINF[0m - main - thread2 complete
+[35m[1mINF[0m - main - thread3 complete
+[35m[1mINF[0m - main - Main task complete

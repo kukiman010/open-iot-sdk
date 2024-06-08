@@ -1,0 +1,1 @@
+azure-iot-sdk: Ensure garbage is filtered out from calls to pool.ntp.org

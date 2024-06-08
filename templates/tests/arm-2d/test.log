@@ -1,0 +1,62 @@
+Arm-2D test
+Arm-2D initialized
+Initial image:
+x = 0, y = 0
+width = 40, height = 24
+buffer = 0x[a-fA-F0-9]+
++----------------------------------------+
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
+|                                        |
++----------------------------------------+
+Final image:
+x = 0, y = 0
+width = 40, height = 24
+buffer = 0x[a-fA-F0-9]+
++----------------------------------------+
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|X                                      X|
+|X XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX X|
+|X X                                  X X|
+|X X XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX X X|
+|X X X                              X X X|
+|X X X XXXXXXXXXXXXXXXXXXXXXXXXXXXX X X X|
+|X X X X                          X X X X|
+|X X X X XXXXXXXXXXXXXXXXXXXXXXXX X X X X|
+|X X X X X                      X X X X X|
+|X X X X X XXXXXXXXXXXXXXXXXXXX X X X X X|
+|X X X X X X                  X X X X X X|
+|X X X X X X                  X X X X X X|
+|X X X X X XXXXXXXXXXXXXXXXXXXX X X X X X|
+|X X X X X                      X X X X X|
+|X X X X XXXXXXXXXXXXXXXXXXXXXXXX X X X X|
+|X X X X                          X X X X|
+|X X X XXXXXXXXXXXXXXXXXXXXXXXXXXXX X X X|
+|X X X                              X X X|
+|X X XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX X X|
+|X X                                  X X|
+|X XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX X|
+|X                                      X|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
++----------------------------------------+

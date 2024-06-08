@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Copyright (c) 2022, Arm Limited and Contributors. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# Tip: set the RPC_ENV_ALREADY_SET environment variable to any non-empty string to skip installing packages if they are
+# already installed in the active virtual environment.
+
+function die {
+    echo "$@" >&2
+    exit 1
+}
+
+HERE=$(realpath "$(dirname "$BASH_SOURCE")")
+FVP=$1
+PYEDMGR=$2
+FIRMWARE=$3
+
+# Check command-line args.
+[[ -z "$FVP" || -z "$PYEDMGR" || -z "$FIRMWARE" ]] && die "Usage: $BASH_SOURCE <FVP> <pyedmgr src dir> <server binary>"
+[[ ! -x "$FVP" && ! -x `which "$FVP"` ]] && die "No such executable: $FVP"
+[[ ! -d "$PYEDMGR" ]] && die "No such directory: $PYEDMGR"
+[[ ! -f "$FIRMWARE" ]] && die "No such file: $PYEDMGR"
+
+PYEDMGR=$(realpath "$PYEDMGR")
+FIRMWARE=$(realpath "$FIRMWARE")
+
+# Enter virtual environment if not already set. Create venv if one doesn't exist.
+if [[ -z "$VIRTUAL_ENV" ]]; then
+    if [[ -d venv ]]; then
+        . venv/bin/activate
+    elif [[ -d $HERE/venv ]]; then
+        . $HERE/venv/bin/activate
+    else
+        if ! command -v virtualenv &> /dev/null
+        then
+            pip install virtualenv
+        fi
+        virtualenv venv
+        trap "{ deactivate; rm -rf venv; }" EXIT
+        . venv/bin/activate
+    fi
+fi
+
+# Install pyedmgr and requirements.
+pushd "$PYEDMGR"
+if [[ -z "$ENV_ALREADY_SET" ]]; then
+    pip3 install -r requirements.txt
+    python3 setup.py install
+fi
+popd
+
+# Install example requirements.
+[[ -z "$ENV_ALREADY_SET" ]] && pip3 install -r $HERE/requirements.txt
+
+# Create test data and run example.
+cd "$HERE"
+cat >"$HERE/test.json" <<EOF
+{
+    "$FVP": {
+        "firmware": ["$FIRMWARE"],
+        "config": "$HERE/MPS3.conf",
+        "args": [ "-Q", "10" ]
+    }
+}
+EOF
+trap "{ rm -f test.json; }" EXIT
+pytest test.py

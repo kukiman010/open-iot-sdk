@@ -1,0 +1,14 @@
+Inside main()
+Thread A: ID = 0x[a-fA-F0-9]+
+Thread B: ID = 0x[a-fA-F0-9]+
+Starting kernel
+Message from Thread A
+Message from Thread B
+Message from Thread A
+Message from Thread B
+Message from Thread A
+Message from Thread B
+Message from Thread A
+Message from Thread B
+Message from Thread A
+Message from Thread B

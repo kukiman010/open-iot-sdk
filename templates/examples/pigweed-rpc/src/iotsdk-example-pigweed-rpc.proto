@@ -1,0 +1,23 @@
+/* Copyright (c) 2022, Arm Limited and Contributors. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+syntax = "proto3";
+
+package iotsdk.example.pw_rpc;
+
+message EchoRequest
+{
+    string text = 1;
+}
+
+message EchoResponse
+{
+    string text = 1;
+}
+
+service EchoService
+{
+    rpc Echo(EchoRequest) returns (EchoResponse)
+    {
+    }
+}

@@ -1,0 +1,19 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] SystemClock.Now
+[       OK ] SystemClock.Now
+[ RUN      ] VirtualSystemClock.Now
+[       OK ] VirtualSystemClock.Now
+[ RUN      ] SystemClock.NowInC
+[       OK ] SystemClock.NowInC
+[ RUN      ] SystemClock.TimeElapsedInC
+[       OK ] SystemClock.TimeElapsedInC
+[ RUN      ] SystemClock.DurationCastInC
+[       OK ] SystemClock.DurationCastInC
+[ RUN      ] SystemClock.DurationMacros
+[       OK ] SystemClock.DurationMacros
+[==========] Done running all tests.
+[  PASSED  ] 6 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

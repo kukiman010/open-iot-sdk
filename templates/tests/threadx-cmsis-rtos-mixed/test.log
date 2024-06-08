@@ -1,0 +1,14 @@
+Inside main()
+CMSIS-RTOS thread: ID = 0x[A-F0-9]+
+Native ThreadX thread: ID = 0x[A-F0-9]+
+Starting kernel
+Message from native ThreadX thread
+Message from CMSIS-RTOS thread
+Message from native ThreadX thread
+Message from CMSIS-RTOS thread
+Message from native ThreadX thread
+Message from CMSIS-RTOS thread
+Message from native ThreadX thread
+Message from CMSIS-RTOS thread
+Message from native ThreadX threa
+Message from CMSIS-RTOS thread

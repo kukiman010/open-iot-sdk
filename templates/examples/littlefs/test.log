@@ -1,0 +1,10 @@
+littlefs example
+littlefs formatted
+littlefs mounted
+File opened
+File written: 5 bytes
+File rewound
+File read: 5 bytes
+File closed
+littlefs unmounted
+File content matches data written

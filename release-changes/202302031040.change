@@ -1,0 +1,5 @@
+license: Update license details for the Open IoT SDK
+
+- Add Azure Netx Duo license details
+- Update component paths for the Open IoT SDK components
+- Remove Googletest license details as this is now included in fff

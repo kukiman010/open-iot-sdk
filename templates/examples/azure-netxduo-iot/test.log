@@ -1,0 +1,12 @@
+DHCP In Progress...
+SNTP Time successfully synchronized.
+[INFO] Azure IoT Security Module has been enabled, status=0
+IoTHub Host Name: [a-zA-Z0-9\.-]+; Device ID: [a-zA-Z0-9\.-]+.
+Waiting to connect to IoTHub...
+Connected to IoTHub.
+Telemetry message sent: {"Message ID":0}.
+Telemetry message sent: {"Message ID":1}.
+Telemetry message sent: {"Message ID":2}.
+Telemetry message sent: {"Message ID":3}.
+Telemetry message sent: {"Message ID":4}.
+Telemetry message sent: {"Message ID":5}.

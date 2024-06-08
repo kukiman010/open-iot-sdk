@@ -1,0 +1,146 @@
+# Copyright (c) 2022, Arm Limited and Contributors. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+include(${pigweed_SOURCE_DIR}/pw_build/pigweed.cmake)
+
+add_library(pw_sync_cmsis_rtos.base INTERFACE)
+target_include_directories(pw_sync_cmsis_rtos.base
+    INTERFACE
+        public
+)
+target_include_directories(pw_sync_cmsis_rtos.base
+    INTERFACE
+        public_override
+)
+target_link_libraries(pw_sync_cmsis_rtos.base
+    INTERFACE
+        pw_assert.check
+        pw_cmsis_rtos_util
+        pw_preprocessor
+        cmsis-rtos-api
+        pw_iot_sdk_config
+)
+target_sources(pw_sync_cmsis_rtos.base
+    INTERFACE
+        internal_mutex.cc
+)
+
+pw_add_module_config(pw_sync_cmsis_rtos_CONFIG)
+pw_add_module_library(pw_sync_cmsis_rtos.binary_semaphore
+    IMPLEMENTS_FACADES
+        pw_sync.binary_semaphore
+    HEADERS
+        public/pw_sync_cmsis_rtos/binary_semaphore_inline.h
+        public/pw_sync_cmsis_rtos/binary_semaphore_native.h
+        public_overrides/pw_sync_backend/binary_semaphore_inline.h
+        public_overrides/pw_sync_backend/binary_semaphore_native.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.counting_semaphore
+    IMPLEMENTS_FACADES
+        pw_sync.counting_semaphore
+    HEADERS
+        public/pw_sync_cmsis_rtos/counting_semaphore_inline.h
+        public/pw_sync_cmsis_rtos/counting_semaphore_native.h
+        public_overrides/pw_sync_backend/counting_semaphore_inline.h
+        public_overrides/pw_sync_backend/counting_semaphore_native.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.mutex
+    IMPLEMENTS_FACADES
+        pw_sync.mutex
+    HEADERS
+        public/pw_sync_cmsis_rtos/mutex_inline.h
+        public/pw_sync_cmsis_rtos/mutex_native.h
+        public_overrides/pw_sync_backend/mutex_inline.h
+        public_overrides/pw_sync_backend/mutex_native.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.timed_mutex
+    IMPLEMENTS_FACADES
+        pw_sync.timed_mutex
+    HEADERS
+        public/pw_sync_cmsis_rtos/timed_mutex_inline.h
+        public_overrides/pw_sync_backend/timed_mutex_inline.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.interrupt_spin_lock
+    IMPLEMENTS_FACADES
+        pw_sync.interrupt_spin_lock
+    HEADERS
+        public/pw_sync_cmsis_rtos/interrupt_spin_lock_inline.h
+        public/pw_sync_cmsis_rtos/interrupt_spin_lock_native.h
+        public_overrides/pw_sync_backend/interrupt_spin_lock_inline.h
+        public_overrides/pw_sync_backend/interrupt_spin_lock_native.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PRIVATE_DEPS
+        pw_interrupt.context
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+    SOURCES
+        native_interrupt_spin_lock.cc
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.thread_notification
+    IMPLEMENTS_FACADES
+        pw_sync.thread_notification
+    HEADERS
+        public/pw_sync_cmsis_rtos/thread_notification_inline.h
+        public/pw_sync_cmsis_rtos/thread_notification_native.h
+        public_overrides/pw_sync_backend/thread_notification_inline.h
+        public_overrides/pw_sync_backend/thread_notification_native.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PRIVATE_DEPS
+        pw_interrupt.context
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+    SOURCES
+        native_thread_notification.cc
+)
+
+pw_add_module_library(pw_sync_cmsis_rtos.timed_thread_notification
+    IMPLEMENTS_FACADES
+        pw_sync.timed_thread_notification
+    HEADERS
+        public/pw_sync_cmsis_rtos/timed_thread_notification_inline.h
+        public_overrides/pw_sync_backend/timed_thread_notification_inline.h
+    PUBLIC_INCLUDES
+        public
+        public_overrides
+    PRIVATE_DEPS
+        pw_interrupt.context
+    PUBLIC_DEPS
+        ${pw_sync_cmsis_rtos_CONFIG}
+        pw_sync_cmsis_rtos.base
+    SOURCES
+        native_thread_notification.cc
+)

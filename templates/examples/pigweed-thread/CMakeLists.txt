@@ -1,0 +1,41 @@
+# Copyright (c) 2022, Arm Limited and Contributors. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# Pigweed thread example
+
+set(example pigweed-thread)
+set(supported_platforms corstone-300 corstone-310)
+set(supported_rtoses cmsis-rtx cmsis-freertos)
+
+foreach(platform IN LISTS supported_platforms)
+    get_target_platform_variables(${platform})
+
+    foreach(rtos IN LISTS supported_rtoses)
+        get_target_rtos_variables(${rtos})
+
+        set(EXAMPLE_TITLE "Example for Pigweed Thread")
+        set(EXAMPLE_INTRO "This example shows the usage of Pigweed Thread. RTOS: ${RTOS_STRING}, platform: ${PLATFORM_STRING}.")
+        set(EXAMPLE_RUN_COMMAND "${PLATFORM_VHT} -a __build/iotsdk-example-pigweed-thread.elf")
+        set(example_dir ${EXAMPLES_OUTPUT_DIR}/${example}/${rtos}/${platform})
+
+        configure_file(CMakeLists.txt.in ${example_dir}/CMakeLists.txt @ONLY)
+        configure_file(${README_TEMPLATE_FILE} ${example_dir}/ReadMe.md @ONLY)
+        configure_file(${LINKER_SCRIPT_GCC} ${example_dir}/gcc.ld @ONLY)
+        configure_file(${LINKER_SCRIPT_ARM} ${example_dir}/armclang.sct @ONLY)
+
+        file(COPY
+            main.cc
+            test.log
+
+            cmsis-config
+
+            DESTINATION ${example_dir}
+        )
+
+        if(rtos STREQUAL "cmsis-freertos")
+            file(COPY freertos-config DESTINATION ${example_dir})
+        endif()
+
+    endforeach()
+
+endforeach()

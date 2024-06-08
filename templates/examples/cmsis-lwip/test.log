@@ -1,0 +1,8 @@
+Initialising network
+Network is up
+UDP sockets created: 0 and 1
+Socket 1 bound
+5 bytes sent on socket 0
+Data received: test
+5 bytes sent on socket 0
+Data received: test

@@ -1,0 +1,11 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] Yield.CompilesAndRuns
+[       OK ] Yield.CompilesAndRuns
+[ RUN      ] Yield.CompilesAndRunsInC
+[       OK ] Yield.CompilesAndRunsInC
+[==========] Done running all tests.
+[  PASSED  ] 2 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

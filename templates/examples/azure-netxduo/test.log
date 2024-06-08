@@ -1,0 +1,18 @@
+Initializing system resources.
+Initializing network.
+DUT IP address: 127.0.0.1.
+Client socket created.
+Client socket bound.
+Server socket created.
+Server socket bound.
+Outgoing packet memory allocated.
+Data appended to outgoing packet memory.
+Client socket sent data packet.
+Server socket waits for packet.
+Server socket received packet.
+Received packet released.
+Server socket unbound.
+Server socket deleted.
+Client socket unbound.
+Client socket deleted.
+Test successfully completed.

@@ -1,0 +1,1 @@
+cmake: Fix PATCH_COMMAND for pigweed to be cross-platform.

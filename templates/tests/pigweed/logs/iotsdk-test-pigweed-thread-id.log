@@ -1,0 +1,9 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] Id.GetId
+[       OK ] Id.GetId
+[==========] Done running all tests.
+[  PASSED  ] 1 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

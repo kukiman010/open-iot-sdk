@@ -1,0 +1,29 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] SystemTimer.CancelInactive
+[       OK ] SystemTimer.CancelInactive
+[ RUN      ] SystemTimer.CancelExplicitly
+[       OK ] SystemTimer.CancelExplicitly
+[ RUN      ] SystemTimer.CancelThroughDestruction
+[       OK ] SystemTimer.CancelThroughDestruction
+[ RUN      ] SystemTimer.CancelThroughRescheduling
+[       OK ] SystemTimer.CancelThroughRescheduling
+[ RUN      ] SystemTimer.StaticInvokeAt
+[       OK ] SystemTimer.StaticInvokeAt
+[ RUN      ] SystemTimer.InvokeAt
+[       OK ] SystemTimer.InvokeAt
+[ RUN      ] SystemTimer.InvokeAfter
+[       OK ] SystemTimer.InvokeAfter
+[ RUN      ] SystemTimer.CancelFromCallback
+[       OK ] SystemTimer.CancelFromCallback
+[ RUN      ] SystemTimer.RescheduleAndCancelFromCallback
+[       OK ] SystemTimer.RescheduleAndCancelFromCallback
+[ RUN      ] SystemTimer.RescheduleFromCallback
+[       OK ] SystemTimer.RescheduleFromCallback
+[ RUN      ] SystemTimer.DoubleRescheduleFromCallback
+[       OK ] SystemTimer.DoubleRescheduleFromCallback
+[==========] Done running all tests.
+[  PASSED  ] 11 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

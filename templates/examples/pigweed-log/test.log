@@ -1,0 +1,4 @@
+[32m[1mDBG[0m - main - Debug log: Details about the execution
+[35m[1mINF[0m - main - Info log: What is going on
+[33m[1mWRN[0m - main - Warning log: When something unexpected happen
+[31m[1mERR[0m - main - Error log: In case of serious error

@@ -1,0 +1,2 @@
+iotsdk.example.pw_rpc.EchoRequest.text max_size:150
+iotsdk.example.pw_rpc.EchoResponse.text max_size:150

@@ -1,0 +1,1 @@
+threadx-cdi-port: Update to include new macros for converting ThreadX priorities to CMSIS-RTOS priorities and vice-versa

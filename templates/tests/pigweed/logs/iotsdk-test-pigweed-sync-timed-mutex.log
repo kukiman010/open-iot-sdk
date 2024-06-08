@@ -1,0 +1,29 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] TimedMutex.LockUnlock
+[       OK ] TimedMutex.LockUnlock
+[ RUN      ] TimedMutex.LockUnlockStatic
+[       OK ] TimedMutex.LockUnlockStatic
+[ RUN      ] TimedMutex.TryLockUnlock
+[       OK ] TimedMutex.TryLockUnlock
+[ RUN      ] TimedMutex.TryLockUnlockFor
+[       OK ] TimedMutex.TryLockUnlockFor
+[ RUN      ] TimedMutex.TryLockUnlockUntil
+[       OK ] TimedMutex.TryLockUnlockUntil
+[ RUN      ] VirtualTimedMutex.LockUnlock
+[       OK ] VirtualTimedMutex.LockUnlock
+[ RUN      ] VirtualTimedMutex.LockUnlockStatic
+[       OK ] VirtualTimedMutex.LockUnlockStatic
+[ RUN      ] TimedMutex.LockUnlockInC
+[       OK ] TimedMutex.LockUnlockInC
+[ RUN      ] TimedMutex.TryLockUnlockInC
+[       OK ] TimedMutex.TryLockUnlockInC
+[ RUN      ] TimedMutex.TryLockUnlockForInC
+[       OK ] TimedMutex.TryLockUnlockForInC
+[ RUN      ] TimedMutex.TryLockUnlockUntilInC
+[       OK ] TimedMutex.TryLockUnlockUntilInC
+[==========] Done running all tests.
+[  PASSED  ] 11 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

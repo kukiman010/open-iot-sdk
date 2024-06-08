@@ -1,0 +1,75 @@
+diff --git a/pw_build/CMakeLists.txt b/pw_build/CMakeLists.txt
+index 79e4bc21..479c759d 100644
+--- a/pw_build/CMakeLists.txt
++++ b/pw_build/CMakeLists.txt
+@@ -85,7 +85,6 @@ target_compile_options(pw_build.strict_warnings
+     "-Wpointer-arith"
+
+     # Make all warnings errors, except for the exemptions below.
+-    "-Werror"
+     "-Wno-error=cpp"  # preprocessor #warning statement
+     "-Wno-error=deprecated-declarations"  # [[deprecated]] attribute
+
+diff --git a/pw_string/CMakeLists.txt b/pw_string/CMakeLists.txt
+index 695c4e81..af7b9f02 100644
+--- a/pw_string/CMakeLists.txt
++++ b/pw_string/CMakeLists.txt
+@@ -88,6 +88,7 @@ pw_add_module_library(pw_string.util
+     pw_status
+   SOURCES
+     public/pw_string/internal/length.h
++    empty.c
+ )
+
+ pw_add_module_library(pw_string.vector
+diff --git a/pw_string/empty.c b/pw_string/empty.c
+new file mode 100644
+index 00000000..e69de29b
+diff --git a/pw_tokenizer/CMakeLists.txt b/pw_tokenizer/CMakeLists.txt
+index a0c44843..28e242dc 100644
+--- a/pw_tokenizer/CMakeLists.txt
++++ b/pw_tokenizer/CMakeLists.txt
+@@ -143,7 +143,7 @@ add_executable(pw_tokenizer.generate_decoding_test_data EXCLUDE_FROM_ALL
+ target_link_libraries(pw_tokenizer.generate_decoding_test_data PRIVATE
+     pw_varint pw_tokenizer)
+ target_compile_options(pw_tokenizer.generate_decoding_test_data PRIVATE
+-    -Wall -Werror)
++    -Wall)
+
+ # Executable for generating a test ELF file for elf_reader_test.py. A host
+ # version of this binary is checked in for use in elf_reader_test.py.
+diff --git a/pw_unit_test/CMakeLists.txt b/pw_unit_test/CMakeLists.txt
+index 9fbd3c54..57252fc0 100644
+--- a/pw_unit_test/CMakeLists.txt
++++ b/pw_unit_test/CMakeLists.txt
+@@ -66,7 +66,17 @@ pw_add_module_library(pw_unit_test.googletest_style_event_handler
+     googletest_style_event_handler.cc
+ )
+
++pw_add_facade(pw_unit_test.main
++  PUBLIC_INCLUDES
++    public
++  PUBLIC_DEPS
++    pw_unit_test
++    pw_unit_test.event_handler
++)
++
+ pw_add_module_library(pw_unit_test.simple_printing_main
++ IMPLEMENTS_FACADES
++    pw_unit_test.main
+   SOURCES
+     simple_printing_main.cc
+     simple_printing_event_handler.cc
+diff --git a/pw_assert_log/public/pw_assert_log/check_log.h b/pw_assert_log/public/pw_assert_log/check_log.h
+index 42f4d17d..be1c333a 100644
+--- a/pw_assert_log/public/pw_assert_log/check_log.h
++++ b/pw_assert_log/public/pw_assert_log/check_log.h
+@@ -64,7 +64,7 @@
+                  comparison_op_str " "                                    \
+                  arg_b_str " (=" type_fmt ")"                             \
+                  ". " message,                                            \
+-              arg_a_val, arg_b_val, __VA_ARGS__);                         \
++              arg_a_val, arg_b_val PW_COMMA_ARGS(__VA_ARGS__));           \
+     PW_UNREACHABLE;                                                       \
+   } while(0)
+ // clang-format on

@@ -1,0 +1,162 @@
+# Copyright (c) 2022-2023, Arm Limited and Contributors. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+cmake_minimum_required(VERSION 3.21.0 FATAL_ERROR)
+
+# Set config variables for the project and dependencies
+set(CMAKE_SYSTEM_PROCESSOR @CMAKE_SYSTEM_PROCESSOR@)
+set(CMAKE_CXX_STANDARD 17)
+set(IOTSDK_FETCH_LIST
+    pigweed
+    pyedmgr
+    @RTOS_FETCH@
+    @PLATFORM_FETCH@
+)
+@RTOS_CONFIG_SET@
+
+include(FetchContent)
+
+# Toolchain files need to exist before first call to project
+FetchContent_Declare(iotsdk-toolchains
+    GIT_REPOSITORY  @TOOLCHAINS_URL@
+    GIT_TAG         @TOOLCHAINS_TAG@
+    SOURCE_DIR      ${CMAKE_BINARY_DIR}/toolchains
+)
+FetchContent_MakeAvailable(iotsdk-toolchains)
+
+# Declare top-level project
+project(iotsdk-example-pigweed-rpc)
+
+# Set executable suffix to be toolchain-independent for ease of documentation
+# and testing. This needs to be done after first call to project().
+set(CMAKE_EXECUTABLE_SUFFIX .elf)
+
+# Set Pigweed backends before SDK fetch.
+include(cmake/pigweed-backends.cmake)
+
+# Add Open IoT SDK
+FetchContent_Declare(open-iot-sdk
+    GIT_REPOSITORY  @IOTSDK_URL@
+    GIT_TAG         @IOTSDK_TAG@
+)
+FetchContent_MakeAvailable(open-iot-sdk)
+
+# Add Open IoT SDK modules to path
+list(APPEND CMAKE_MODULE_PATH ${open-iot-sdk_SOURCE_DIR}/cmake)
+
+# Add the project_options tool for code quality checks on this example.
+# In a user's own project, the use of project_options is entirely optional.
+FetchContent_Declare(project_options
+    GIT_REPOSITORY  @PROJECT_OPTIONS_URL@
+    GIT_TAG         @PROJECT_OPTIONS_TAG@
+)
+FetchContent_MakeAvailable(project_options)
+include(${project_options_SOURCE_DIR}/Index.cmake)
+include(${project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
+
+# Apply Open IoT SDK's default compiler warnings to this example via project_options
+include(${open-iot-sdk_SOURCE_DIR}/cmake/AddToolchainWarningFlags.cmake)
+set(COMPILER_WARNINGS ${IOTSDK_WARNING_FLAGS} ${IOTSDK_WARNING_AS_ERRORS_FLAGS})
+dynamic_project_options(
+    CLANG_WARNINGS  ${COMPILER_WARNINGS}
+    GCC_WARNINGS    ${COMPILER_WARNINGS}
+)
+
+include(ConvertElfToBin)
+include(CTest)
+
+# Configure component properties
+
+# CMSIS 5 require projects to provide configuration macros via RTE_Components.h
+# and CMSIS_device_header. The macro CMSIS_device_header is not automatically set
+# based on CMAKE_SYSTEM_PROCESSOR in the place where cmsis-core is first defined,
+# because a project may want to provide its own device header.
+target_compile_definitions(cmsis-core INTERFACE CMSIS_device_header="@CMSIS_device_header@")
+
+target_compile_definitions(pw_iot_sdk_config
+    INTERFACE
+        PW_IOTSDK_CMSIS_RTX=$<IN_LIST:cmsis-rtx,IOTSDK_FETCH_LIST>
+)
+
+# Add RTOS configuration headers
+@RTOS_HEADER_INCLUDE@
+
+# Link cmsis-rtos-api against a concrete implementation
+target_link_libraries(cmsis-rtos-api
+    PUBLIC
+        @RTOS_LIBS@
+)
+
+target_link_libraries(pw_log_mcu_driver_hal INTERFACE pw_log_mdh_cmsis_rtos_lock)
+target_link_libraries(pw_log_mdh_cmsis_rtos_lock INTERFACE cmsis-rtos-api)
+
+# We don't have std::lock_guard with ArmCompiler
+target_compile_definitions(pw_rpc.common PUBLIC PW_RPC_USE_GLOBAL_MUTEX=0)
+
+pw_proto_library(iotsdk-example-pigweed-rpc-proto
+    SOURCES
+        src/iotsdk-example-pigweed-rpc.proto
+    INPUTS
+        src/iotsdk-example-pigweed-rpc.options
+)
+
+add_executable(iotsdk-example-pigweed-rpc-server
+    src/main.cc
+    src/server.cc
+    src/uart.c
+)
+
+target_include_directories(iotsdk-example-pigweed-rpc-server
+    PRIVATE
+        ${CMAKE_CURRENT_BINARY_DIR}/iotsdk-example-pigweed-rpc-proto/pwpb/src
+        ${CMAKE_CURRENT_BINARY_DIR}/iotsdk-example-pigweed-rpc-proto/pwpb_rpc/src
+)
+
+target_link_libraries(pw_sys_io_mcu_driver_hal PRIVATE pw_sys_io_mdh_cmsis_rtos_lock)
+
+target_link_libraries(iotsdk-example-pigweed-rpc-server
+    pw_assert.assert
+    pw_assert.check
+    pw_log
+    pw_log_mcu_driver_hal
+    pw_log_mdh_cmsis_rtos_lock
+    pw_sync.interrupt_spin_lock
+    pw_sync_cmsis_rtos.interrupt_spin_lock
+    pw_string
+    pw_bytes
+    pw_protobuf
+    pw_rpc.server
+    pw_hdlc
+    pw_sys_io
+    pw_sys_io_mcu_driver_hal
+    pw_span
+
+    iotsdk-example-pigweed-rpc-proto.pwpb_rpc
+
+    cmsis-rtos-api
+    @PLATFORM_LIBS@
+    @PLATFORM_STARTUP@
+
+    project_options
+    project_warnings
+    iotsdk-serial-retarget
+)
+
+if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    set(linker_script ${CMAKE_CURRENT_LIST_DIR}/gcc.ld)
+    target_link_options(iotsdk-example-pigweed-rpc-server PRIVATE -T ${linker_script})
+elseif(CMAKE_C_COMPILER_ID STREQUAL "ARMClang")
+    set(linker_script ${CMAKE_CURRENT_LIST_DIR}/armclang.sct)
+    target_link_options(iotsdk-example-pigweed-rpc-server PRIVATE --scatter=${linker_script})
+endif()
+set_target_properties(iotsdk-example-pigweed-rpc-server PROPERTIES LINK_DEPENDS ${linker_script})
+target_elf_to_bin(iotsdk-example-pigweed-rpc-server)
+
+add_test(
+    NAME    iotsdk-example-pigweed-rpc
+    COMMAND bash
+            ${CMAKE_CURRENT_SOURCE_DIR}/example/run-example
+            @PLATFORM_FVP@
+            $ENV{PYEDMGR_ROOT}
+            ${CMAKE_CURRENT_BINARY_DIR}/iotsdk-example-pigweed-rpc-server.elf
+)

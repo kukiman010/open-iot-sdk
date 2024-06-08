@@ -1,0 +1,31 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] Sleep.SleepForPositiveDuration
+[       OK ] Sleep.SleepForPositiveDuration
+[ RUN      ] Sleep.SleepForZeroLengthDuration
+[       OK ] Sleep.SleepForZeroLengthDuration
+[ RUN      ] Sleep.SleepForNegativeDuration
+[       OK ] Sleep.SleepForNegativeDuration
+[ RUN      ] Sleep.SleepUntilFutureWakeupTime
+[       OK ] Sleep.SleepUntilFutureWakeupTime
+[ RUN      ] Sleep.SleepUntilCurrentWakeupTime
+[       OK ] Sleep.SleepUntilCurrentWakeupTime
+[ RUN      ] Sleep.SleepUntilPastWakeupTime
+[       OK ] Sleep.SleepUntilPastWakeupTime
+[ RUN      ] Sleep.SleepForPositiveDurationInC
+[       OK ] Sleep.SleepForPositiveDurationInC
+[ RUN      ] Sleep.SleepForZeroLengthDurationInC
+[       OK ] Sleep.SleepForZeroLengthDurationInC
+[ RUN      ] Sleep.SleepForNegativeDurationInC
+[       OK ] Sleep.SleepForNegativeDurationInC
+[ RUN      ] Sleep.SleepUntilFutureWakeupTimeInC
+[       OK ] Sleep.SleepUntilFutureWakeupTimeInC
+[ RUN      ] Sleep.SleepUntilCurrentWakeupTimeInC
+[       OK ] Sleep.SleepUntilCurrentWakeupTimeInC
+[ RUN      ] Sleep.SleepUntilPastWakeupTimeInC
+[       OK ] Sleep.SleepUntilPastWakeupTimeInC
+[==========] Done running all tests.
+[  PASSED  ] 12 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

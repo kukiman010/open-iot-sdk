@@ -1,0 +1,57 @@
+[35m[1mINF[0m - test - Starting Pigweed Tests
+[35m[1mINF[0m - test - ✂ --------------------
+[==========] Running all tests.
+[ RUN      ] CountingSemaphore.EmptyInitialState
+[       OK ] CountingSemaphore.EmptyInitialState
+[ RUN      ] CountingSemaphore.SingleRelease
+[       OK ] CountingSemaphore.SingleRelease
+[ RUN      ] CountingSemaphore.EmptyInitialStateStatic
+[       OK ] CountingSemaphore.EmptyInitialStateStatic
+[ RUN      ] CountingSemaphore.ReleaseStatic
+[       OK ] CountingSemaphore.ReleaseStatic
+[ RUN      ] CountingSemaphore.MultiRelease
+[       OK ] CountingSemaphore.MultiRelease
+[ RUN      ] CountingSemaphore.TryAcquireForFull
+[       OK ] CountingSemaphore.TryAcquireForFull
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyPositiveTimeout
+[       OK ] CountingSemaphore.TryAcquireForEmptyPositiveTimeout
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyZeroLengthTimeout
+[       OK ] CountingSemaphore.TryAcquireForEmptyZeroLengthTimeout
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyNegativeTimeout
+[       OK ] CountingSemaphore.TryAcquireForEmptyNegativeTimeout
+[ RUN      ] CountingSemaphore.TryAcquireUntilFull
+[       OK ] CountingSemaphore.TryAcquireUntilFull
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyFutureDeadline
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyFutureDeadline
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyCurrentDeadline
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyCurrentDeadline
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyPastDeadline
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyPastDeadline
+[ RUN      ] CountingSemaphore.EmptyInitialStateInC
+[       OK ] CountingSemaphore.EmptyInitialStateInC
+[ RUN      ] CountingSemaphore.SingeReleaseInC
+[       OK ] CountingSemaphore.SingeReleaseInC
+[ RUN      ] CountingSemaphore.MultiReleaseInC
+[       OK ] CountingSemaphore.MultiReleaseInC
+[ RUN      ] CountingSemaphore.TryAcquireForFullInC
+[       OK ] CountingSemaphore.TryAcquireForFullInC
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyPositiveTimeoutInC
+[       OK ] CountingSemaphore.TryAcquireForEmptyPositiveTimeoutInC
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyZeroLengthTimeoutInC
+[       OK ] CountingSemaphore.TryAcquireForEmptyZeroLengthTimeoutInC
+[ RUN      ] CountingSemaphore.TryAcquireForEmptyNegativeTimeoutInC
+[       OK ] CountingSemaphore.TryAcquireForEmptyNegativeTimeoutInC
+[ RUN      ] CountingSemaphore.TryAcquireUntilFullInC
+[       OK ] CountingSemaphore.TryAcquireUntilFullInC
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyFutureDeadlineInC
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyFutureDeadlineInC
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyCurrentDeadlineInC
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyCurrentDeadlineInC
+[ RUN      ] CountingSemaphore.TryAcquireUntilEmptyPastDeadlineInC
+[       OK ] CountingSemaphore.TryAcquireUntilEmptyPastDeadlineInC
+[ RUN      ] CountingSemaphore.MaxInC
+[       OK ] CountingSemaphore.MaxInC
+[==========] Done running all tests.
+[  PASSED  ] 25 test(s).
+[35m[1mINF[0m - test - ✂ ------------------------
+[35m[1mINF[0m - test - Pigweed reported status 0

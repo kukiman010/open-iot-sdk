@@ -1,0 +1,4 @@
+mdh: Update to most recent version
+
+Update to the sha for MCU Reference Platforms For Arm to incorporate the
+refactor of delay_loop in mbed-wait that has been done within MCU Driver HAL

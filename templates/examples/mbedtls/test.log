@@ -1,0 +1,16 @@
+Initialising kernel
+Initialising network
+Starting kernel
+Network is up
+Server os.mbed.com [0-9]+(?:\.[0-9]+){3}:[0-9]+ connecting...
+Successful connection to the server
+Performing the TLS handshake...
+Successfully completed the TLS handshake
+Verifying certificate...
+Certificate verification passed
+Established TLS connection
+Sending server request
+Server request successfully sent
+Reading server response...
+Server response OK
+Demo stopped
